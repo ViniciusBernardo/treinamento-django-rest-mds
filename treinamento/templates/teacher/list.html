@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+{% load staticfiles %}
+
+<html lang="pt-br">
+    <head>
+    </head>
+
+    <body>
+        <div>
+            <ul>
+            {% for teacher in teachers %}
+                <li>
+                    {{teacher.full_name}} ({{teacher.knowledge_area}}) ({{teacher.date_of_birth}})
+                </li>
+            {% empty %}
+                <h2>Nenhum professor cadastrado</h2>
+            {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>
