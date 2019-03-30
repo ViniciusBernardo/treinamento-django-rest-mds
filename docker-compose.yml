@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  web:
+    container_name: 'treinamento_web'
+    build: .
+    volumes:
+      - .:/home/treinamento
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - migrate
+    ports:
+      - "8000:8000"
+    tty: True
+
+  migrate:
+    container_name: 'treinamento_migrate'
+    build: .
+    volumes:
+      - .:/home/treinamento
+    command: python manage.py migrate
+    depends_on:
+      - migrations
+    tty: True
+
+  migrations:
+    container_name: 'treinamento_migrations'
+    build: .
+    volumes:
+      - .:/home/treinamento
+    command: python manage.py makemigrations
+    tty: True
+
+  command:
+    container_name: 'treinamento_command'
+    build: .
+    volumes:
+      - .:/home/treinamento
+    tty: True
